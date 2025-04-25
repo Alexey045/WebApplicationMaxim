@@ -6,6 +6,9 @@ namespace WebApplicationMaxim
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
+			// Добавляем привязку конфигурации
+			builder.Services.Configure<AppConfig>(builder.Configuration);
+
 			// Add services to the container.
 
 			builder.Services.AddControllers();
