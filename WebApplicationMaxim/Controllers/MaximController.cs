@@ -138,6 +138,7 @@ namespace WebApplicationMaxim.Controllers
 			{
 				sb.Append($"{item.Key}-{item.Value} ");
 			}
+
 			return sb.ToString().Trim();
 		}
 
