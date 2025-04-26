@@ -8,6 +8,8 @@ namespace WebApplicationMaxim
 
 			// Добавляем привязку конфигурации
 			builder.Services.Configure<AppConfig>(builder.Configuration);
+			builder.Services.AddSingleton<RequestCounterService>();
+
 
 			// Add services to the container.
 
@@ -20,6 +22,8 @@ namespace WebApplicationMaxim
 
 			var app = builder.Build();
 
+			app.UseMiddleware<RequestLimitMiddleware>();
+
 			// Configure the HTTP request pipeline.
 			if (app.Environment.IsDevelopment())
 			{
@@ -30,6 +34,7 @@ namespace WebApplicationMaxim
 			app.UseHttpsRedirection();
 
 			app.UseAuthorization();
+
 
 
 			app.MapControllers();
