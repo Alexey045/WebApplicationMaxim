@@ -34,7 +34,7 @@ namespace WebApplicationMaxim.Controllers
 				});
 			}
 
-			var result = Reverse(text);
+			var result = ReverseText(text);
 
 			return new MaximResult
 			{
@@ -77,16 +77,21 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private string Reverse(string input)
+		private string ReverseText(string input)
 		{
-			var sb = new StringBuilder(input.Length);
-
-			for (int i = input.Length - 1; i > -1; i--)
+			string Reverse(string input)
 			{
-				sb.Append(input[i]);
+				var sb = new StringBuilder(input.Length);
+
+				for (int i = input.Length - 1; i > -1; i--)
+				{
+					sb.Append(input[i]);
+				}
+
+				return sb.ToString();
 			}
 
-			return sb.ToString();
+			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
 		}
 
 		private List<char> IsLowerAscii(string input)
@@ -108,13 +113,9 @@ namespace WebApplicationMaxim.Controllers
 		{
 			var symbolCount = new Dictionary<char, int>();
 
-			var result = input.Length % 2 == 0
-				? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..]))
-				: string.Concat(Reverse(input), input);
-
-			for (var i = 0; i < result.Length; i++)
+			for (var i = 0; i < input.Length; i++)
 			{
-				var symbol = result[i];
+				var symbol = input[i];
 
 				if (symbolCount.ContainsKey(symbol))
 				{
@@ -138,6 +139,7 @@ namespace WebApplicationMaxim.Controllers
 			{
 				sb.Append($"{item.Key}-{item.Value} ");
 			}
+
 			return sb.ToString().Trim();
 		}
 
@@ -182,7 +184,7 @@ namespace WebApplicationMaxim.Controllers
 			return "¬веден неверный код сортировки";
 		}
 
-		private void QuickSort(char[] arr, int start, int end)
+		private static void QuickSort(char[] arr, int start, int end)
 		{
 			if (start < end)
 			{
@@ -193,10 +195,10 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private int Partition(char[] arr, int start, int end)
+		private static int Partition(char[] arr, int start, int end)
 		{
 			var random = new Random();
-			var pivot = random.Next(start, end);
+			var pivot = random.Next(start, end + 1);
 
 			Swap(arr, pivot, end); // move to the highest
 
@@ -204,7 +206,7 @@ namespace WebApplicationMaxim.Controllers
 
 			for (int j = start; j < end; j++)
 			{
-				if (arr[j] < arr[pivot])
+				if (arr[j] < arr[end])
 				{
 					i++;
 					Swap(arr, i, j);
