@@ -103,7 +103,6 @@ namespace WebApplicationMaxim.Controllers
 			}
 
 			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
-
 		}
 
 		private List<char> IsLowerAscii(string input)
@@ -124,7 +123,6 @@ namespace WebApplicationMaxim.Controllers
 		private Dictionary<char, int> CountSymbols(string input)
 		{
 			var symbolCount = new Dictionary<char, int>();
-
 
 			for (var i = 0; i < input.Length; i++)
 			{
