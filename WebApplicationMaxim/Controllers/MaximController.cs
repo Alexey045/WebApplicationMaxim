@@ -88,18 +88,22 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private string Reverse(string input)
+		private string ReverseText(string input)
 		{
-			var sb = new StringBuilder(input.Length);
-
-			for (int i = input.Length - 1; i > -1; i--)
+			string Reverse(string input)
 			{
-				sb.Append(input[i]);
+				var sb = new StringBuilder(input.Length);
+
+				for (int i = input.Length - 1; i > -1; i--)
+				{
+					sb.Append(input[i]);
+				}
+
+				return sb.ToString();
 			}
 
-			return sb.ToString();
+			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
 		}
-
 		private List<char> IsLowerAscii(string input)
 		{
 			var result = new List<char>();
