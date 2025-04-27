@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Text;
 
 namespace WebApplicationMaxim.Controllers
@@ -9,10 +10,12 @@ namespace WebApplicationMaxim.Controllers
 	{
 		private static readonly HashSet<char> vowels = new(new char[] { 'a', 'e', 'i', 'o', 'u', 'y' });
 		private readonly IHttpClientFactory httpClientFactory;
+		private readonly AppConfig config;
 
-		public MaximController(IHttpClientFactory httpClientFactory)
+		public MaximController(IHttpClientFactory httpClientFactory, IOptions<AppConfig> config)
 		{
 			this.httpClientFactory = httpClientFactory;
+			this.config = config.Value;
 		}
 
 		[HttpGet]
@@ -31,6 +34,14 @@ namespace WebApplicationMaxim.Controllers
 				{
 					status = 400,
 					title = $"Были введены неподходящие символы: {string.Join("", badSymbols)}"
+				});
+			}
+			if (config.Settings!.BlackList!.Contains(text))
+			{
+				return BadRequest(new
+				{
+					status = 400,
+					title = $"Строка находится в черном списке"
 				});
 			}
 
@@ -53,7 +64,7 @@ namespace WebApplicationMaxim.Controllers
 			{
 				int index;
 				var client = httpClientFactory.CreateClient();
-				var url = $"http://www.randomnumberapi.com/api/v1.0/random?min=0&max={input.Length}&count=1";
+				var url = $"{config.RandomApi}?min=0&max={input.Length}&count=1";
 
 				var response = await client.GetAsync(url);
 
@@ -93,6 +104,8 @@ namespace WebApplicationMaxim.Controllers
 
 			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
 		}
+
+
 
 		private List<char> IsLowerAscii(string input)
 		{
