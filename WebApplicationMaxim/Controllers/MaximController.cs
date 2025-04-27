@@ -192,10 +192,7 @@ namespace WebApplicationMaxim.Controllers
 
 					return $"Результат QuickSort: {new string(symbols)}";
 				case 2:
-					//if (symbols.Length > 0)
-					//{
 					TreeSort(symbols);
-					//}
 
 					return $"Результат TreeSort: {new string(symbols)}";
 			}
