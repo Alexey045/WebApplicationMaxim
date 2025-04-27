@@ -184,7 +184,7 @@ namespace WebApplicationMaxim.Controllers
 			return "¬веден неверный код сортировки";
 		}
 
-		private void QuickSort(char[] arr, int start, int end)
+		private static void QuickSort(char[] arr, int start, int end)
 		{
 			if (start < end)
 			{
@@ -195,10 +195,10 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private int Partition(char[] arr, int start, int end)
+		private static int Partition(char[] arr, int start, int end)
 		{
 			var random = new Random();
-			var pivot = random.Next(start, end);
+			var pivot = random.Next(start, end + 1);
 
 			Swap(arr, pivot, end); // move to the highest
 
@@ -206,7 +206,7 @@ namespace WebApplicationMaxim.Controllers
 
 			for (int j = start; j < end; j++)
 			{
-				if (arr[j] < arr[pivot])
+				if (arr[j] < arr[end])
 				{
 					i++;
 					Swap(arr, i, j);
