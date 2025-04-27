@@ -34,7 +34,7 @@ namespace WebApplicationMaxim.Controllers
 				});
 			}
 
-			var result = Reverse(text);
+			var result = ReverseText(text);
 
 			return new MaximResult
 			{
@@ -77,16 +77,21 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private string Reverse(string input)
+		private string ReverseText(string input)
 		{
-			var sb = new StringBuilder(input.Length);
-
-			for (int i = input.Length - 1; i > -1; i--)
+			string Reverse(string input)
 			{
-				sb.Append(input[i]);
+				var sb = new StringBuilder(input.Length);
+
+				for (int i = input.Length - 1; i > -1; i--)
+				{
+					sb.Append(input[i]);
+				}
+
+				return sb.ToString();
 			}
 
-			return sb.ToString();
+			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
 		}
 
 		private List<char> IsLowerAscii(string input)
@@ -109,8 +114,8 @@ namespace WebApplicationMaxim.Controllers
 			var symbolCount = new Dictionary<char, int>();
 
 			var result = input.Length % 2 == 0
-				? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..]))
-				: string.Concat(Reverse(input), input);
+				? string.Concat(ReverseText(input[..(input.Length / 2)]), ReverseText(input[(input.Length / 2)..]))
+				: string.Concat(ReverseText(input), input);
 
 			for (var i = 0; i < result.Length; i++)
 			{
