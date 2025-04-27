@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplicationMaxim", "WebA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProjectMaxim", "TestProjectMaxim\TestProjectMaxim.csproj", "{046A1FDD-E203-4351-9AA4-72068C567E25}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maxim", "Maxim\Maxim.csproj", "{5842DA31-2C9D-4D40-B65C-C6435CD4B55E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{046A1FDD-E203-4351-9AA4-72068C567E25}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{046A1FDD-E203-4351-9AA4-72068C567E25}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{046A1FDD-E203-4351-9AA4-72068C567E25}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5842DA31-2C9D-4D40-B65C-C6435CD4B55E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5842DA31-2C9D-4D40-B65C-C6435CD4B55E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5842DA31-2C9D-4D40-B65C-C6435CD4B55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5842DA31-2C9D-4D40-B65C-C6435CD4B55E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
