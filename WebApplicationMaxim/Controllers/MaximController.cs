@@ -113,13 +113,9 @@ namespace WebApplicationMaxim.Controllers
 		{
 			var symbolCount = new Dictionary<char, int>();
 
-			var result = input.Length % 2 == 0
-				? string.Concat(ReverseText(input[..(input.Length / 2)]), ReverseText(input[(input.Length / 2)..]))
-				: string.Concat(ReverseText(input), input);
-
-			for (var i = 0; i < result.Length; i++)
+			for (var i = 0; i < input.Length; i++)
 			{
-				var symbol = result[i];
+				var symbol = input[i];
 
 				if (symbolCount.ContainsKey(symbol))
 				{
