@@ -52,7 +52,7 @@ namespace WebApplicationMaxim.Controllers
 
 				Result1 = result,
 				Result2 = WriteDictionary(CountSymbols(result)),
-				Result3 = LongestVowelSubstring(result),
+				Result3 = Vowel(result),
 				Result4 = ChooseSortingAlgorithm(result, sort),
 				Result5 = await RemoveRandomSymbol(result),
 			};
@@ -88,7 +88,7 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private string ReverseText(string input)
+		public static string ReverseText(string input)
 		{
 			string Reverse(string input)
 			{
@@ -106,7 +106,7 @@ namespace WebApplicationMaxim.Controllers
 
 		}
 
-		private List<char> IsLowerAscii(string input)
+		public static List<char> IsLowerAscii(string input)
 		{
 			var result = new List<char>();
 
@@ -121,7 +121,7 @@ namespace WebApplicationMaxim.Controllers
 			return result;
 		}
 
-		private Dictionary<char, int> CountSymbols(string input)
+		public static Dictionary<char, int> CountSymbols(string input)
 		{
 			var symbolCount = new Dictionary<char, int>();
 
@@ -156,7 +156,7 @@ namespace WebApplicationMaxim.Controllers
 			return sb.ToString().Trim();
 		}
 
-		private string LongestVowelSubstring(string input)
+		public static string LongestVowelSubstring(string input)
 		{
 			var longestVowelsStringStart = -1;
 			var longestVowelsStringEnd = -1;
@@ -175,10 +175,15 @@ namespace WebApplicationMaxim.Controllers
 				}
 			}
 
-			return $"Самая длинная подстрока начинающаяся и заканчивающаяся на гласную: {((longestVowelsStringStart != -1) ? input.Substring(longestVowelsStringStart, longestVowelsStringEnd - longestVowelsStringStart + 1) : "ОТСУТСТВУЕТ")}";
+			return (longestVowelsStringStart != -1) ? input.Substring(longestVowelsStringStart, longestVowelsStringEnd - longestVowelsStringStart + 1) : "";
 		}
 
-		private string ChooseSortingAlgorithm(string input, int sort)
+		private string Vowel(string input)
+		{
+			return $"Самая длинная подстрока начинающаяся и заканчивающаяся на гласную: {LongestVowelSubstring(input)}";
+		}
+
+		public static string ChooseSortingAlgorithm(string input, int sort)
 		{
 			var symbols = input.ToCharArray();
 
@@ -189,7 +194,10 @@ namespace WebApplicationMaxim.Controllers
 
 					return $"Результат QuickSort: {new string(symbols)}";
 				case 2:
+					//if (symbols.Length > 0)
+					//{
 					TreeSort(symbols);
+					//}
 
 					return $"Результат TreeSort: {new string(symbols)}";
 			}
@@ -197,7 +205,7 @@ namespace WebApplicationMaxim.Controllers
 			return "Введен неверный код сортировки";
 		}
 
-		private void QuickSort(char[] arr, int start, int end)
+		private static void QuickSort(char[] arr, int start, int end)
 		{
 			if (start < end)
 			{
@@ -208,10 +216,10 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private int Partition(char[] arr, int start, int end)
+		private static int Partition(char[] arr, int start, int end)
 		{
 			var random = new Random();
-			var pivot = random.Next(start, end);
+			var pivot = random.Next(start, end + 1); // end + 1, before was end
 
 			Swap(arr, pivot, end); // move to the highest
 
@@ -219,7 +227,7 @@ namespace WebApplicationMaxim.Controllers
 
 			for (int j = start; j < end; j++)
 			{
-				if (arr[j] < arr[pivot])
+				if (arr[j] < arr[end])
 				{
 					i++;
 					Swap(arr, i, j);
