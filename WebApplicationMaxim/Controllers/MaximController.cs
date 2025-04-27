@@ -103,7 +103,6 @@ namespace WebApplicationMaxim.Controllers
 			}
 
 			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
-
 		}
 
 		public static List<char> IsLowerAscii(string input)
@@ -124,7 +123,6 @@ namespace WebApplicationMaxim.Controllers
 		public static Dictionary<char, int> CountSymbols(string input)
 		{
 			var symbolCount = new Dictionary<char, int>();
-
 
 			for (var i = 0; i < input.Length; i++)
 			{
@@ -219,7 +217,7 @@ namespace WebApplicationMaxim.Controllers
 		private static int Partition(char[] arr, int start, int end)
 		{
 			var random = new Random();
-			var pivot = random.Next(start, end + 1); // end + 1, before was end
+			var pivot = random.Next(start, end + 1);
 
 			Swap(arr, pivot, end); // move to the highest
 
