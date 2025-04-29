@@ -52,7 +52,7 @@ namespace WebApplicationMaxim.Controllers
 
 				Result1 = result,
 				Result2 = WriteDictionary(CountSymbols(result)),
-				Result3 = LongestVowelSubstring(result),
+				Result3 = Vowel(result),
 				Result4 = ChooseSortingAlgorithm(result, sort),
 				Result5 = await RemoveRandomSymbol(result),
 			};
@@ -88,7 +88,7 @@ namespace WebApplicationMaxim.Controllers
 			}
 		}
 
-		private string ReverseText(string input)
+		public static string ReverseText(string input)
 		{
 			string Reverse(string input)
 			{
@@ -105,7 +105,7 @@ namespace WebApplicationMaxim.Controllers
 			return input.Length % 2 == 0 ? string.Concat(Reverse(input[..(input.Length / 2)]), Reverse(input[(input.Length / 2)..])) : string.Concat(Reverse(input), input);
 		}
 
-		private List<char> IsLowerAscii(string input)
+		public static List<char> IsLowerAscii(string input)
 		{
 			var result = new List<char>();
 
@@ -120,7 +120,7 @@ namespace WebApplicationMaxim.Controllers
 			return result;
 		}
 
-		private Dictionary<char, int> CountSymbols(string input)
+		public static Dictionary<char, int> CountSymbols(string input)
 		{
 			var symbolCount = new Dictionary<char, int>();
 
@@ -154,7 +154,7 @@ namespace WebApplicationMaxim.Controllers
 			return sb.ToString().Trim();
 		}
 
-		private string LongestVowelSubstring(string input)
+		public static string LongestVowelSubstring(string input)
 		{
 			var longestVowelsStringStart = -1;
 			var longestVowelsStringEnd = -1;
@@ -173,10 +173,15 @@ namespace WebApplicationMaxim.Controllers
 				}
 			}
 
-			return $"Самая длинная подстрока начинающаяся и заканчивающаяся на гласную: {((longestVowelsStringStart != -1) ? input.Substring(longestVowelsStringStart, longestVowelsStringEnd - longestVowelsStringStart + 1) : "ОТСУТСТВУЕТ")}";
+			return (longestVowelsStringStart != -1) ? input.Substring(longestVowelsStringStart, longestVowelsStringEnd - longestVowelsStringStart + 1) : "";
 		}
 
-		private string ChooseSortingAlgorithm(string input, int sort)
+		private string Vowel(string input)
+		{
+			return $"Самая длинная подстрока начинающаяся и заканчивающаяся на гласную: {LongestVowelSubstring(input)}";
+		}
+
+		public static string ChooseSortingAlgorithm(string input, int sort)
 		{
 			var symbols = input.ToCharArray();
 
